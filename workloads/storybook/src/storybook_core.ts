@@ -4,7 +4,7 @@ import type { RunnerSdk } from "@capakit/sdk";
 const LLAMA_WORKLOAD = workloadMid("llama");
 const LLAMA_ENDPOINT = endpointPath("/oaic");
 const IMAGEGEN_WORKLOAD = workloadMid("imagegen");
-const IMAGEGEN_ENDPOINT = endpointPath("/v1");
+const IMAGEGEN_ENDPOINT = endpointPath("/oaic");
 const PAGE_COUNT = 10;
 
 export type IdeaRequest = {
