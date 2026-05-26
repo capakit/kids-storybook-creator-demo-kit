@@ -1,0 +1,103 @@
+version: '1'
+name: kids-storybook-creator
+options:
+  gpu:
+    kind: enum
+    default: metal
+    enum_values:
+    - none
+    - metal
+    description: Local GPU acceleration mode for bundled local model dependencies.
+  llama_context_size:
+    kind: number
+    default: 8192
+    description: Context size passed through to the bundled llama.cpp dependency.
+  story_model:
+    kind: string
+    default: ggml-org/gemma-3-270m-it-GGUF:Q8_0
+    description: Local GGUF/Hugging Face model spec used for story planning and text.
+  image_model:
+    kind: string
+    default: turingevo/tiny-sd-gguf:segmind_tiny-sd-q4_K
+    description: Diffusion model spec used for page images.
+  image_backend:
+    kind: enum
+    default: auto
+    enum_values:
+    - auto
+    - cpu
+    - metal
+    description: Backend passed through to the stable-diffusion.cpp dependency.
+  image_style:
+    kind: string
+    default: soft watercolor storybook
+    description: Default visual style used for page image prompts.
+dependencies:
+  llama:
+    source: !LocalPackage
+      path: ../llama-cpp-local
+    target: !BundledChild
+      team_name: local-llama-cpp
+      lifecycle: applied
+      profile_name: local
+      connectivity: same_host_loopback
+    options:
+      default_model:
+        from_option: story_model
+      gpu:
+        from_option: gpu
+      context_size:
+        from_option: llama_context_size
+    mount_bindings:
+      models: models
+  imagegen:
+    source: !LocalPackage
+      path: ../stable-diffusion-local
+    target: !BundledChild
+      team_name: local-image-generation
+      lifecycle: applied
+      profile_name: local
+      connectivity: same_host_loopback
+    options:
+      default_model:
+        from_option: image_model
+      backend:
+        from_option: image_backend
+    mount_bindings:
+      models: models
+host_mounts:
+  models:
+    usage: Local model cache for bundled llama.cpp and stable-diffusion.cpp dependencies
+    access: read_write
+workloads:
+  llama:
+    import:
+      dependency: llama
+      export: oaic
+  imagegen:
+    import:
+      dependency: imagegen
+      export: oaic
+  storybook:
+    connections:
+    - llama
+    - imagegen
+    endpoints:
+    - http
+    runtime:
+      source:
+        toolchain: bun
+        prepare:
+          command: bun install
+          allow_network: true
+        start:
+          command: bun run start
+          env_from_options:
+            STORYBOOK_MODEL: story_model
+            STORYBOOK_IMAGE_MODEL: image_model
+            STORYBOOK_IMAGE_STYLE: image_style
+expose:
+- path: /
+  target: storybook
+  endpoints:
+  - http

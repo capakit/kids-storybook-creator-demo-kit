@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@capakit/sdk": "0.0.6-dev.20260525130617.7cf75746",
+    "@picocss/pico": "2.1.1",
+    "hono": "latest",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "vite": "5.4.21"
+  },
+  "devDependencies": {
+    "@types/node": "22.12.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "4.3.4",
+    "typescript": "5.5.4"
+  },
+  "name": "storybook-web",
+  "private": true,
+  "scripts": {
+    "build": "vite build && tsc --noEmit",
+    "start": "bun run build && bun run src/index.ts"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}
