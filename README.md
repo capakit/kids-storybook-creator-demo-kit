@@ -75,7 +75,7 @@ Commands
   capakit run https://github.com/capakit/kids-storybook-creator-demo-kit \
     --mount models=~/.capakit/models
 - Test:
-  capakit test /Users/roman/Code/capakit/demo_kits/kids-storybook-creator-demo-kit
+  capakit test .
 ```
 
 ## Run
