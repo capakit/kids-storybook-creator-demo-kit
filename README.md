@@ -9,6 +9,8 @@ Local-first AI app Kit for generating and editing a simple illustrated children'
 
 ![Kids Storybook Creator screenshot](screenshot.png)
 
+**Tags:** `web-ui` `llama.cpp` `stable-diffusion` `image-generation` `local-ai` `react` `vite` `typescript` `bun`
+
 ## What It Does
 
 - Turns a story idea into a 10-page story arc.
