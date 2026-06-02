@@ -1,18 +1,33 @@
-import type { RunnerSdk } from "@capakit/sdk";
-import { mountTests } from "@capakit/sdk/testing";
+import { endpointPath, type RunnerSdk } from "@capakit/sdk";
 
 import { StorybookCreator } from "./storybook_core.ts";
 
 export function registerTestHttp(sdk: RunnerSdk): void {
     const creator = new StorybookCreator(sdk);
-    mountTests(sdk, {
-        tests: {
-            "storybook-e2e-smoke": {
-                description: "Run a full storybook smoke test through the local text and image dependencies.",
-                run: async () => await runStorybookSmoke(creator),
-            },
+    sdk.mount({
+        protocol: "http",
+        endpoint: endpointPath("/test"),
+        handler: async (request) => {
+            if (request.method !== "POST") {
+                return Response.json({ error: "method not allowed" }, { status: 405 });
+            }
+            if (lastPathSegment(new URL(request.url).pathname) !== "storybook-e2e-smoke") {
+                return Response.json({ error: "not found" }, { status: 404 });
+            }
+            try {
+                return Response.json(await runStorybookSmoke(creator));
+            } catch (error) {
+                return Response.json(
+                    { error: error instanceof Error ? error.message : String(error) },
+                    { status: 500 },
+                );
+            }
         },
     });
+}
+
+function lastPathSegment(pathname: string): string | undefined {
+    return pathname.split("/").filter(Boolean).at(-1);
 }
 
 async function runStorybookSmoke(creator: StorybookCreator) {
