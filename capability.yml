@@ -34,13 +34,8 @@ options:
     description: Default visual style used for page image prompts.
 dependencies:
   llama:
-    source: !LocalPackage
-      path: ../llama-cpp-local
-    target: !BundledChild
-      team_name: local-llama-cpp
-      lifecycle: applied
-      profile_name: local
-      connectivity: same_host_loopback
+    source:
+      package: https://github.com/capakit/llama-cpp-local-kit
     options:
       default_model:
         from_option: story_model
@@ -51,13 +46,8 @@ dependencies:
     mount_bindings:
       models: models
   imagegen:
-    source: !LocalPackage
-      path: ../stable-diffusion-local
-    target: !BundledChild
-      team_name: local-image-generation
-      lifecycle: applied
-      profile_name: local
-      connectivity: same_host_loopback
+    source:
+      package: https://github.com/capakit/stable-diffusion-local-kit
     options:
       default_model:
         from_option: image_model
@@ -84,6 +74,8 @@ workloads:
     - imagegen
     endpoints:
     - http
+    - protocol: http
+      path: /test
     runtime:
       source:
         toolchain: bun

@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "displayName": "Kids Storybook Creator",
+  "repo": "https://github.com/capakit/kids-storybook-creator-demo-kit",
+  "description": "Local-first AI app Kit for generating and editing a simple illustrated children's storybook.",
+  "screenshot": "screenshot.png",
+  "whatItDoes": [
+    "Turns a story idea into a 10-page story arc.",
+    "Uses a local language model for story text and a local image model for page art.",
+    "Serves a browser UI for editing pages and printing the final storybook."
+  ],
+  "technologies": [
+    "CapaKit HTTP workload",
+    "Bundled llama.cpp AI app Kit dependency",
+    "Bundled stable-diffusion.cpp AI app Kit dependency",
+    "React",
+    "Vite",
+    "TypeScript",
+    "Bun"
+  ],
+  "catalog": {
+    "featured": true,
+    "order": 20,
+    "tags": [
+      "web-ui",
+      "local-llm",
+      "image-generation"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+tests:
+  - id: storybook-e2e-smoke
+    kind: http
+    test: generates a story and one page image through bundled local dependencies
+    target:
+      workload: storybook
+      endpoint: /test
+    request:
+      method: POST
+      path: /storybook-e2e-smoke
+    verboseOutput:
+      - $.title
+      - $.page_count
+      - $.first_page_text
+      - $.image_provider
+      - $.image_bytes
+    validations:
+      - $.title.exists()
+      - $.page_count.eq(10)
+      - $.first_page_text.exists()
+      - $.image_provider.eq("imagegen")
+      - $.image_bytes.gte(100)
+  - id: storybook-typecheck
+    kind: exec
+    test: storybook workload typechecks
+    target:
+      workload: storybook
+    command:
+      - bun
+      - x
+      - tsc
+      - --noEmit
+    validations:
+      - $.exit_code.eq(0)

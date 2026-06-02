@@ -1,5 +1,6 @@
 import { endpointPath, workloadMid } from "@capakit/sdk";
 import type { RunnerSdk } from "@capakit/sdk";
+import { createOaicClient } from "@capakit/sdk/oaic";
 
 const LLAMA_WORKLOAD = workloadMid("llama");
 const LLAMA_ENDPOINT = endpointPath("/oaic");
@@ -90,7 +91,7 @@ export class StorybookCreator {
             imagePrompt: input.image_prompt,
             style: imageStyle(input.style),
         });
-        const client = await this.sdk.workloads.oaicClient(IMAGEGEN_WORKLOAD, IMAGEGEN_ENDPOINT);
+        const client = await createOaicClient(this.sdk, IMAGEGEN_WORKLOAD, IMAGEGEN_ENDPOINT);
         const response = await client.images.generate({
             model: process.env.STORYBOOK_IMAGE_MODEL ?? "storybook-image-model",
             prompt,
@@ -118,7 +119,7 @@ export class StorybookCreator {
         temperature: number;
         maxTokens: number;
     }): Promise<string> {
-        const client = await this.sdk.workloads.oaicClient(LLAMA_WORKLOAD, LLAMA_ENDPOINT);
+        const client = await createOaicClient(this.sdk, LLAMA_WORKLOAD, LLAMA_ENDPOINT);
         const response = await client.chat.completions.create({
             model: process.env.STORYBOOK_MODEL ?? "storybook-text-model",
             temperature: input.temperature,
