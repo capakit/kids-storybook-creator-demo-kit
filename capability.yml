@@ -39,6 +39,8 @@ dependencies:
     options:
       default_model:
         from_option: story_model
+      hydrate_models:
+        from_option: story_model
       gpu:
         from_option: gpu
       context_size:
@@ -50,6 +52,8 @@ dependencies:
       package: https://github.com/capakit/stable-diffusion-local-kit
     options:
       default_model:
+        from_option: image_model
+      hydrate_models:
         from_option: image_model
       backend:
         from_option: image_backend
@@ -63,11 +67,11 @@ workloads:
   llama:
     import:
       dependency: llama
-      export: oaic
+      exposed_path: /oaic
   imagegen:
     import:
       dependency: imagegen
-      export: oaic
+      exposed_path: /oaic
   storybook:
     connections:
     - llama
@@ -81,7 +85,6 @@ workloads:
         toolchain: bun
         prepare:
           command: bun install
-          allow_network: true
         start:
           command: bun run start
           env_from_options:

@@ -82,7 +82,9 @@ export function App() {
         const page = story.pages.find((candidate) => candidate.id === pageId);
         if (!page) return;
 
-        setStory(markPageGenerating(story, pageId, true));
+        setStory((current) =>
+            current ? markPageGenerating(current, pageId, true) : current,
+        );
         try {
             const payload = await postJson<{
                 image_url: string;
@@ -114,9 +116,13 @@ export function App() {
     }
 
     async function generateDirtyImages() {
-        for (const page of dirtyPages) {
-            await generatePageImage(page.id);
-        }
+        const pageIds = dirtyPages.map((page) => page.id);
+        await withBusy("Generating images", async () => {
+            for (const pageId of pageIds) {
+                await generatePageImage(pageId);
+            }
+            setStatus("Images ready");
+        });
     }
 
     async function withBusy(label: string, run: () => Promise<void>) {
