@@ -1,8 +1,8 @@
-import { endpointPath, type RunnerSdk } from "@capakit/sdk";
+import { endpointPath, type WorkloadSdk } from "@capakit/sdk";
 
 import { StorybookCreator } from "./storybook_core.ts";
 
-export function registerTestHttp(sdk: RunnerSdk): void {
+export function registerTestHttp(sdk: WorkloadSdk): void {
     const creator = new StorybookCreator(sdk);
     sdk.mount({
         protocol: "http",

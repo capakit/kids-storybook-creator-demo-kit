@@ -1,5 +1,5 @@
 import { endpointPath, workloadMid } from "@capakit/sdk";
-import type { RunnerSdk } from "@capakit/sdk";
+import type { WorkloadSdk } from "@capakit/sdk";
 import { createOaicClient } from "@capakit/sdk/oaic";
 
 const LLAMA_WORKLOAD = workloadMid("llama");
@@ -45,7 +45,7 @@ export type ImageResponse = {
 };
 
 export class StorybookCreator {
-    constructor(private readonly sdk: RunnerSdk) {}
+    constructor(private readonly sdk: WorkloadSdk) {}
 
     async suggestIdea(input: IdeaRequest): Promise<{ idea: string }> {
         const text = await this.completeText({
