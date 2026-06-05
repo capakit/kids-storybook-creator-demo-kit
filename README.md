@@ -9,8 +9,6 @@ Local-first AI app Kit for generating and editing a simple illustrated children'
 
 ![Kids Storybook Creator screenshot](screenshot.png)
 
-**Tags:** `web-ui` `llama.cpp` `stable-diffusion` `image-generation` `local-ai` `react` `vite` `typescript` `bun`
-
 ## What It Does
 
 - Turns a story idea into a 10-page story arc.
@@ -19,13 +17,15 @@ Local-first AI app Kit for generating and editing a simple illustrated children'
 
 ## Technologies
 
-- CapaKit HTTP workload
-- Bundled llama.cpp AI app Kit dependency
-- Bundled stable-diffusion.cpp AI app Kit dependency
-- React
-- Vite
-- TypeScript
-- Bun
+- web-ui
+- llama.cpp
+- stable-diffusion
+- image-generation
+- local-ai
+- react
+- vite
+- typescript
+- bun
 
 ## App Kit Info
 
@@ -58,26 +58,35 @@ External services
 No external services declared.
 
 AI app Kit dependencies
-- imagegen: repo package https://github.com/capakit/stable-diffusion-local-kit (default bundled AI app Kit)
+- imagegen: GitHub repo https://github.com/capakit/stable-diffusion-local-kit (default bundled AI app Kit)
   Options passed:
   - backend <- option image_backend (default: auto)
   - default_model <- option image_model (default: turingevo/tiny-sd-gguf:segmind_tiny-sd-q4_K)
+  - hydrate_models <- option image_model (default: turingevo/tiny-sd-gguf:segmind_tiny-sd-q4_K)
   Mounts passed:
   - models <- models (Local model cache for bundled llama.cpp and stable-diffusion.cpp dependencies)
-- llama: repo package https://github.com/capakit/llama-cpp-local-kit (default bundled AI app Kit)
+- llama: GitHub repo https://github.com/capakit/llama-cpp-local-kit (default bundled AI app Kit)
   Options passed:
   - context_size <- option llama_context_size (default: 8192)
   - default_model <- option story_model (default: ggml-org/gemma-3-270m-it-GGUF:Q8_0)
   - gpu <- option gpu (default: metal)
+  - hydrate_models <- option story_model (default: ggml-org/gemma-3-270m-it-GGUF:Q8_0)
   Mounts passed:
   - models <- models (Local model cache for bundled llama.cpp and stable-diffusion.cpp dependencies)
+
+Use as dependency
+Add this to another Kit's capability.yml:
+dependencies:
+  kids-storybook-creator:
+    source:
+      path: /Users/roman/Code/capakit/demo-kits/kids-storybook-creator-demo-kit
 
 Commands
 - Run:
   capakit run https://github.com/capakit/kids-storybook-creator-demo-kit \
     --mount models=~/.capakit/models
 - Test:
-  capakit test .
+  capakit test --kit /Users/roman/Code/capakit/demo-kits/kids-storybook-creator-demo-kit
 ```
 
 ## Run
@@ -93,12 +102,6 @@ capakit run https://github.com/capakit/kids-storybook-creator-demo-kit \
 capakit test .
 ```
 
-## Security
-
-Vault secrets are user-provided secrets available only to trusted integrations such as secure exit nodes. Kit secrets are Kit-local secrets that can be exposed to code workloads.
-
 ## About CapaKit
 
-CapaKit runs AI app Kits locally with isolated workloads, explicit mounts, and agent-friendly commands. Learn more at https://capakit.com.
-
-More AI app Kits: https://github.com/capakit/apps
+https://capakit.com

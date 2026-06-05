@@ -10,13 +10,15 @@
     "Serves a browser UI for editing pages and printing the final storybook."
   ],
   "technologies": [
-    "CapaKit HTTP workload",
-    "Bundled llama.cpp AI app Kit dependency",
-    "Bundled stable-diffusion.cpp AI app Kit dependency",
-    "React",
-    "Vite",
-    "TypeScript",
-    "Bun"
+    "web-ui",
+    "llama.cpp",
+    "stable-diffusion",
+    "image-generation",
+    "local-ai",
+    "react",
+    "vite",
+    "typescript",
+    "bun"
   ],
   "catalog": {
     "featured": true,
