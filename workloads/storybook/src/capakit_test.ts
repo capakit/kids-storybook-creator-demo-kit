@@ -11,7 +11,7 @@ export function registerTestHttp(sdk: WorkloadSdk): void {
             if (request.method !== "POST") {
                 return Response.json({ error: "method not allowed" }, { status: 405 });
             }
-            if (lastPathSegment(new URL(request.url).pathname) !== "storybook-e2e-smoke") {
+            if (lastPathSegment(new URL(request.url).pathname) !== "generates-story-and-page-image-through-local-dependencies") {
                 return Response.json({ error: "not found" }, { status: 404 });
             }
             try {
