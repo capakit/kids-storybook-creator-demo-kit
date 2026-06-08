@@ -36,7 +36,7 @@ options:
 dependencies:
   llama:
     source:
-      path: ../llama-cpp-local-kit
+      git: https://github.com/capakit/llama-cpp-local-kit
     options:
       default_model:
         from_option: story_model
@@ -50,7 +50,7 @@ dependencies:
       models: models
   imagegen:
     source:
-      path: ../stable-diffusion-local-kit
+      git: https://github.com/capakit/stable-diffusion-local-kit
     options:
       default_model:
         from_option: image_model
