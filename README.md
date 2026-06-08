@@ -15,7 +15,7 @@ Local-first AI app Kit for generating and editing a simple illustrated children'
 - Uses a local language model for story text and a local image model for page art.
 - Serves a browser UI for editing pages and printing the final storybook.
 
-## Technologies
+## Tags
 
 - web-ui
 - llama.cpp
