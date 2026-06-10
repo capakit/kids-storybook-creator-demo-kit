@@ -2,7 +2,7 @@
   "schema": 1,
   "displayName": "Kids Storybook Creator",
   "repo": "https://github.com/capakit/kids-storybook-creator-demo-kit",
-  "description": "Local-first AI app Kit for generating and editing a simple illustrated children's storybook.",
+  "description": "Local Kit for generating and editing a simple illustrated children's storybook.",
   "screenshot": "screenshot.png",
   "whatItDoes": [
     "Turns a story idea into a 10-page story arc.",

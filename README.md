@@ -5,7 +5,7 @@ Update kit-meta.json or capability.yml, then rerun the generator instead of hand
 
 # Kids Storybook Creator
 
-Local-first AI app Kit for generating and editing a simple illustrated children's storybook.
+Local Kit for generating and editing a simple illustrated children's storybook.
 
 ![Kids Storybook Creator screenshot](screenshot.png)
 
@@ -27,10 +27,11 @@ Local-first AI app Kit for generating and editing a simple illustrated children'
 - typescript
 - bun
 
-## App Kit Info
+## Kit Info
 
 ```text
-AI app Kit: kids-storybook-creator
+Kit: kids-storybook-creator
+License: Apache-2.0
 
 Exposes
 - Public path: /
@@ -57,15 +58,15 @@ Options:
 External services
 No external services declared.
 
-AI app Kit dependencies
-- imagegen: GitHub repo https://github.com/capakit/stable-diffusion-local-kit (default bundled AI app Kit)
+Kit dependencies
+- imagegen: Git repo https://github.com/capakit/stable-diffusion-local-kit (default bundled Kit)
   Options passed:
   - backend <- option image_backend (default: auto)
   - default_model <- option image_model (default: turingevo/tiny-sd-gguf:segmind_tiny-sd-q4_K)
   - hydrate_models <- option image_model (default: turingevo/tiny-sd-gguf:segmind_tiny-sd-q4_K)
   Mounts passed:
   - models <- models (Local model cache for bundled llama.cpp and stable-diffusion.cpp dependencies)
-- llama: GitHub repo https://github.com/capakit/llama-cpp-local-kit (default bundled AI app Kit)
+- llama: Git repo https://github.com/capakit/llama-cpp-local-kit (default bundled Kit)
   Options passed:
   - context_size <- option llama_context_size (default: 8192)
   - default_model <- option story_model (default: ggml-org/gemma-3-270m-it-GGUF:Q8_0)
@@ -103,5 +104,7 @@ capakit test .
 ```
 
 ## About CapaKit
+
+CapaKit is a free runtime and CLI toolkit for building AI app Kits. When your agent builds, tests, or runs a Kit, it happens in isolation, not on your host.
 
 https://capakit.com
